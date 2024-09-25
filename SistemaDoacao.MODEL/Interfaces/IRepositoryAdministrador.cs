@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDoacao.MODEL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemaDoacao.MODEL.Interfaces
 {
-    internal interface IRepositoryAdministrador
+    public interface IRepositoryAdministrador : IRepositoryBase<ADMINISTRADOR>
     {
     }
 }

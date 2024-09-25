@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemaDoacao.MODEL.Repository
 {
-    internal class RepostiroryEndereco
+    public class RepostiroryEndereco
     {
     }
 }

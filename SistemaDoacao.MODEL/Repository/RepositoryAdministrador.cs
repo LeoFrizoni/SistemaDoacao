@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SistemaDoacao.MODEL.Repository
 {
-    internal class RepositoryAdministrador
+    public class RepositoryAdministrador
     {
     }
 }

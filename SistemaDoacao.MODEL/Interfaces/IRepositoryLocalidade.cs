@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemaDoacao.MODEL.Interfaces
 {
-    public interface IRepositoryCategoria : IRepositoryBase<CATEGORIA>
+    public interface IRepositoryLocalidade : IRepositoryBase<LOCALIDADE>
     {
     }
 }
