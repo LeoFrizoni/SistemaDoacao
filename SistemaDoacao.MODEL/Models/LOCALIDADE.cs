@@ -15,7 +15,9 @@ public partial class LOCALIDADE
 
     public string LocSite { get; set; }
 
+    public string LocCoordenada { get; set; }
+
     public virtual ICollection<ENDERECO> ENDERECOs { get; set; } = new List<ENDERECO>();
 
-    public virtual ICollection<CATEGORIA> CLCodigoCategoria { get; set; } = new List<CATEGORIA>();
+    public virtual ICollection<CATEGORIum> CLCodigoCategoria { get; set; } = new List<CATEGORIum>();
 }
