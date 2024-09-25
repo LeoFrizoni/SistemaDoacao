@@ -19,5 +19,5 @@ public partial class LOCALIDADE
 
     public virtual ICollection<ENDERECO> ENDERECOs { get; set; } = new List<ENDERECO>();
 
-    public virtual ICollection<CATEGORIum> CLCodigoCategoria { get; set; } = new List<CATEGORIum>();
+    public virtual ICollection<CATEGORIA> CLCodigoCategoria { get; set; } = new List<CATEGORIA>();
 }

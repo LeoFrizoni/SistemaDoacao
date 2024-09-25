@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SistemaDoacao.MODEL.Models;
 
-public partial class CATEGORIum
+public partial class CATEGORIA
 {
     public int CatCodigo { get; set; }
 

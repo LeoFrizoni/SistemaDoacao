@@ -19,7 +19,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
     public virtual DbSet<ADMINISTRADOR> ADMINISTRADORs { get; set; }
 
-    public virtual DbSet<CATEGORIum> CATEGORIAs { get; set; }
+    public virtual DbSet<CATEGORIA> CATEGORIAs { get; set; }
 
     public virtual DbSet<ENDERECO> ENDERECOs { get; set; }
 
@@ -47,7 +47,7 @@ public partial class Sistema_DoacoesContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CATEGORIum>(entity =>
+        modelBuilder.Entity<CATEGORIA>(entity =>
         {
             entity.HasKey(e => e.CatCodigo).HasName("PK__CATEGORI__16498BD9CA7E1923");
 
@@ -66,7 +66,7 @@ public partial class Sistema_DoacoesContext : DbContext
                     r => r.HasOne<LOCALIDADE>().WithMany()
                         .HasForeignKey("CLCodigoLocalidade")
                         .HasConstraintName("FK__CATEGORIA__CLCod__403A8C7D"),
-                    l => l.HasOne<CATEGORIum>().WithMany()
+                    l => l.HasOne<CATEGORIA>().WithMany()
                         .HasForeignKey("CLCodigoCategoria")
                         .HasConstraintName("FK__CATEGORIA__CLCod__3F466844"),
                     j =>
