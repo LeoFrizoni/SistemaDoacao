@@ -12,6 +12,8 @@ namespace SistemaDoacao.MODEL.DTO
         public string locNome { get; set; }
         public string locDescricao { get; set; }
         public string locSite { get; set; }
+        public string locCoordenada { get; set; }
+
 
     }
 }
