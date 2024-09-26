@@ -51,7 +51,7 @@ namespace SistemaDoacao.API.Controllers
             try
             {
                 await _Service.ExcluirCategoriaDTO(id);
-                return Ok("");
+                return Ok("Categoria excluida");
             }
             catch (Exception ex)
             {
