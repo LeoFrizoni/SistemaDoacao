@@ -42,5 +42,19 @@ namespace SistemaDoacao.MODEL.Services
             };
             await oRepositoryCategoria.IncluirAsync(categoria);
         }
+        public async Task ExcluirCategoriaDTO(int catCodigo)
+        {
+            var categoria = await oRepositoryCategoria.SelecionarChaveAsync(catCodigo);
+
+            if (categoria != null)
+            {
+                await oRepositoryCategoria.ExcluirAsync(categoria);
+            }
+            else
+            {
+                throw new Exception("Categoria não encontrada.");
+            }
+        }
+
     }
 }

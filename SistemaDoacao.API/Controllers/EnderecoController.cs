@@ -2,7 +2,7 @@
 
 namespace SistemaDoacao.API.Controllers
 {
-    public class Endereco : Controller
+    public class EnderecoController : Controller
     {
         public IActionResult Index()
         {
