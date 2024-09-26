@@ -21,6 +21,7 @@ namespace SistemaDoacao.MODEL.ViewModel
         // Endereco
         
         public int EnderecoCodigo { get; set; }
+        public int EnderecoLocCodigo { get; set; }
         public string CEP {  get; set; }
         public string Cidade {  get; set; }
         public string Bairro { get; set; }
@@ -43,6 +44,7 @@ namespace SistemaDoacao.MODEL.ViewModel
                               SiteLocalidade = loc.LocSite,
                               CoordenadaLocalidade = loc.LocCoordenada,
                               EnderecoCodigo = end.EndCodigo,
+                              EnderecoLocCodigo = end.EndCodigoLocalidade,
                               CEP = end.EndCEP,
                               Cidade = end.EndCidade,
                               Bairro = end.EndBairro,

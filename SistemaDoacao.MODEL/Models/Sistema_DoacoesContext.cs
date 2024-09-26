@@ -33,7 +33,7 @@ public partial class Sistema_DoacoesContext : DbContext
     {
         modelBuilder.Entity<ADMINISTRADOR>(entity =>
         {
-            entity.HasKey(e => e.AdmCodigo).HasName("PK__ADMINIST__BB1662F52FBEEF95");
+            entity.HasKey(e => e.AdmCodigo).HasName("PK__ADMINIST__BB1662F5C1BC12C1");
 
             entity.ToTable("ADMINISTRADOR");
 
@@ -49,7 +49,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<CATEGORIA>(entity =>
         {
-            entity.HasKey(e => e.CatCodigo).HasName("PK__CATEGORI__16498BD9C7F60EC9");
+            entity.HasKey(e => e.CatCodigo).HasName("PK__CATEGORI__16498BD9E661C047");
 
             entity.ToTable("CATEGORIA");
 
@@ -71,7 +71,7 @@ public partial class Sistema_DoacoesContext : DbContext
                         .HasConstraintName("FK__CATEGORIA__CLCod__3F466844"),
                     j =>
                     {
-                        j.HasKey("CLCodigoCategoria", "CLCodigoLocalidade").HasName("PK__CATEGORI__535345264325AF15");
+                        j.HasKey("CLCodigoCategoria", "CLCodigoLocalidade").HasName("PK__CATEGORI__5353452654855370");
                         j.ToTable("CATEGORIA_LOCALIDADE");
                         j.HasIndex(new[] { "CLCodigoCategoria" }, "CATEGORIA_LOCALIDADE_FKIndex1");
                         j.HasIndex(new[] { "CLCodigoLocalidade" }, "CATEGORIA_LOCALIDADE_FKIndex2");
@@ -80,7 +80,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<ENDERECO>(entity =>
         {
-            entity.HasKey(e => e.EndCodigo).HasName("PK__ENDERECO__4EB6A165DA91FC3A");
+            entity.HasKey(e => e.EndCodigo).HasName("PK__ENDERECO__4EB6A1655226B267");
 
             entity.ToTable("ENDERECO");
 
@@ -114,7 +114,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<LOCALIDADE>(entity =>
         {
-            entity.HasKey(e => e.LocCodigo).HasName("PK__LOCALIDA__897DF110DBCEC98D");
+            entity.HasKey(e => e.LocCodigo).HasName("PK__LOCALIDA__897DF110DFC1143A");
 
             entity.ToTable("LOCALIDADE");
 

@@ -32,16 +32,16 @@ namespace SistemaDoacao.API.Controllers
         }
 
         [HttpPost("PostLocalidade")]
-        public async Task<IActionResult> Post(LocalidadeVM localidade)
+        public async Task<IActionResult> Post(LocalidadeDTO localidade)
         {
-            await _Service.IncluirLocalidadeAsyncVM(localidade);
+            await _Service.IncluirLocalidadeDTO(localidade);
             return Ok("Localidade registrada");
         }
 
-        [HttpPost("PutLocalidade")]
-        public async Task<IActionResult> Put(LocalidadeVM localidade)
+        [HttpPut("PutLocalidade")]
+        public async Task<IActionResult> Put(LocalidadeDTO localidade)
         {
-            await _Service.AlterarLocalidadeAsyncVM(localidade);
+            await _Service.AlterarLocalidadeDTO(localidade);
             return Ok("Localidade alterada");
         }
 
@@ -50,20 +50,35 @@ namespace SistemaDoacao.API.Controllers
         {
             try
             {
-                // Cria uma nova instancia de LocalidadeVM com o ID passado
-                var localidadeVM = new LocalidadeVM { CodigoLocalidade = id };
-
-                // Chama o serviço de exclusão, passando a ViewModel com o ID
-                await _Service.ExcluirLocalidadeAsyncVM(localidadeVM);
-
-                return Ok("Localidade excluída com sucesso.");
+                await _Service.ExcluirLocalidadeDTO(id);
+                return Ok("Categoria excluida");
             }
             catch (Exception ex)
             {
-                // Retorna uma mensagem de erro caso algo corra mal
                 return BadRequest(ex.Message);
             }
         }
+
+
+        //[HttpDelete("DeleteLocalidade/{id}")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    try
+        //    {
+        //        // Cria uma nova instancia de LocalidadeVM com o ID passado
+        //        var localidadeVM = new LocalidadeVM { CodigoLocalidade = id };
+
+        //        // Chama o serviço de exclusão, passando a ViewModel com o ID
+        //        await _Service.ExcluirLocalidadeAsyncVM(localidadeVM);
+
+        //        return Ok("Localidade excluída com sucesso.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Retorna uma mensagem de erro caso algo corra mal
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
 
     }

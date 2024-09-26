@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SistemaDoacao.MODEL.DTO;
+using SistemaDoacao.MODEL.Interfaces;
 using SistemaDoacao.MODEL.Models;
 using SistemaDoacao.MODEL.Repository;
 using SistemaDoacao.MODEL.ViewModel;
@@ -24,18 +25,46 @@ namespace SistemaDoacao.MODEL.Services
             oRepositoryLocalidade = new RepostiroryLocalidade(context);
         }
 
-        //public async Task IncluirLocalidadeDTO(LocalidadeDTO localidadeDTO)
-        //{
-        //    var localidade = new LOCALIDADE()
-        //    {
-        //        LocCodigo = localidadeDTO.locCodigo,
-        //        LocNome = localidadeDTO.locNome,
-        //        LocDescricao = localidadeDTO.locDescricao,
-        //        LocCoordenada = localidadeDTO.locCoordenada,
-        //        LocSite = localidadeDTO.locSite
-        //    };
-        //    await oRepositoryLocalidade.IncluirAsync(localidade);
-        //}
+        public async Task IncluirLocalidadeDTO(LocalidadeDTO localidadeDTO)
+        {
+            var localidade = new LOCALIDADE()
+            {
+                LocCodigo = localidadeDTO.locCodigo,
+                LocNome = localidadeDTO.locNome,
+                LocDescricao = localidadeDTO.locDescricao,
+                LocCoordenada = localidadeDTO.locCoordenada,
+                LocSite = localidadeDTO.locSite
+            };
+            await oRepositoryLocalidade.IncluirAsync(localidade);
+        }
+
+        public async Task AlterarLocalidadeDTO(LocalidadeDTO localidadeDTO)
+        {
+            var localidade = new LOCALIDADE()
+            {
+                LocCodigo = localidadeDTO.locCodigo,
+                LocNome = localidadeDTO.locNome,
+                LocDescricao = localidadeDTO.locDescricao,
+                LocCoordenada = localidadeDTO.locCoordenada,
+                LocSite = localidadeDTO.locSite
+            };
+            await oRepositoryLocalidade.AlterarAsync(localidade);
+        }
+        public async Task ExcluirLocalidadeDTO(int locCodigo)
+        {
+            var categoria = await oRepositoryLocalidade.SelecionarChaveAsync(locCodigo);
+
+            if (categoria != null)
+            {
+                await oRepositoryLocalidade.ExcluirAsync(locCodigo);
+            }
+            else
+            {
+                throw new Exception("Categoria não encontrada.");
+            }
+        }
+
+        //UTILIZANDO ViewModel
 
         public async Task<LocalidadeVM> IncluirLocalidadeAsyncVM(LocalidadeVM localidadeVM)
         {
@@ -47,6 +76,7 @@ namespace SistemaDoacao.MODEL.Services
                 LocSite = localidadeVM.SiteLocalidade,
                 LocCoordenada = localidadeVM.CoordenadaLocalidade
             };
+            await oRepositoryLocalidade.IncluirAsync(localidade);
 
             var endereco = new ENDERECO()
             {
@@ -60,7 +90,8 @@ namespace SistemaDoacao.MODEL.Services
                 EndDataRegistro = localidadeVM.DataRegistroEndereco
             };
 
-            await oRepositoryLocalidade.IncluirAsync(localidade);
+            
+            await oRepositoryEndereco.IncluirAsync(endereco);
             
 
             return localidadeVM;
@@ -90,6 +121,7 @@ namespace SistemaDoacao.MODEL.Services
             };
 
             await oRepositoryLocalidade.AlterarAsync(localidade);
+            await oRepositoryEndereco.AlterarAsync(endereco);
 
             return localidadeVM;
         }

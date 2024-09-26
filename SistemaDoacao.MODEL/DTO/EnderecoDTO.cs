@@ -13,8 +13,9 @@ namespace SistemaDoacao.MODEL.DTO
         public string endCEP { get; set; }
         public string endCidade { get; set; }
         public string endLogradouro { get; set; }
-        public int? endNumero { get; set; }
+        public int endNumero { get; set; }
         public string endComplemento { get; set; }
+        public string endBairro { get; set; }
         public DateTime endDataRegistro { get; set; }
 
     }
