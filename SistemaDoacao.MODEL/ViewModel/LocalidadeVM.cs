@@ -49,7 +49,10 @@ namespace SistemaDoacao.MODEL.ViewModel
                               Logradouro = end.EndLogradouro,
                               Numero = end.EndNumero,
                               Complemento = end.EndComplemento,
-                          })
+                              DataRegistroEndereco = end.EndDataRegistro
+                          }).ToListAsync();
         }
+
+
     }
 }

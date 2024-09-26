@@ -19,7 +19,7 @@ public partial class ENDERECO
 
     public string EndLogradouro { get; set; }
 
-    public int? EndNumero { get; set; }
+    public int EndNumero { get; set; }
 
     public string EndComplemento { get; set; }
 

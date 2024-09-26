@@ -1,12 +1,70 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaDoacao.MODEL.DTO;
+using SistemaDoacao.MODEL.Models;
+using SistemaDoacao.MODEL.Services;
+using SistemaDoacao.MODEL.ViewModel;
 
 namespace SistemaDoacao.API.Controllers
 {
-    public class LocalidadeController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class LocalidadeController : ControllerBase
     {
-        public IActionResult Index()
+        private Sistema_DoacoesContext _context;
+        private ServiceLocalidade _Service;
+
+        public LocalidadeController(Sistema_DoacoesContext context)
         {
-            return View();
+            _context = context;
+            _Service = new ServiceLocalidade(context);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _Service.oRepositoryLocalidade.SelecionarTodosAsync());
+        }
+
+        [HttpGet("GetLocalidadeById/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            return Ok(await _Service.oRepositoryLocalidade.SelecionarChaveAsync(id));
+        }
+
+        [HttpPost("PostLocalidade")]
+        public async Task<IActionResult> Post(LocalidadeVM localidade)
+        {
+            await _Service.IncluirLocalidadeAsyncVM(localidade);
+            return Ok("Localidade registrada");
+        }
+
+        [HttpPost("PutLocalidade")]
+        public async Task<IActionResult> Put(LocalidadeVM localidade)
+        {
+            await _Service.AlterarLocalidadeAsyncVM(localidade);
+            return Ok("Localidade alterada");
+        }
+
+        [HttpDelete("DeleteLocalidade/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                // Cria uma nova instancia de LocalidadeVM com o ID passado
+                var localidadeVM = new LocalidadeVM { CodigoLocalidade = id };
+
+                // Chama o serviço de exclusão, passando a ViewModel com o ID
+                await _Service.ExcluirLocalidadeAsyncVM(localidadeVM);
+
+                return Ok("Localidade excluída com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                // Retorna uma mensagem de erro caso algo corra mal
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }

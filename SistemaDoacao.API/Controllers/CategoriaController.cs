@@ -38,7 +38,7 @@ namespace SistemaDoacao.API.Controllers
             return Ok("Categoria registrada");
         }
 
-        [HttpPost("PutMembros")]
+        [HttpPost("PutCategoria")]
         public async Task<IActionResult> Put(CategoriaDTO categoria)
         {
             await _Service.AlterarCategoriaDTO(categoria);
