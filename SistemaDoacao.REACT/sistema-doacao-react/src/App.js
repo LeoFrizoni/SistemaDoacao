@@ -23,7 +23,7 @@
 // }
 
 import React , {useEffect} from "react";
-import Home from "./components/pages/home/index/index.html"
+import Home from "./components/pages/home/index/home"
 
 const App = () => {
   return(
