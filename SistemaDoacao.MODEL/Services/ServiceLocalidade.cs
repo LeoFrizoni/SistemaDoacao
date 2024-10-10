@@ -131,16 +131,14 @@ namespace SistemaDoacao.MODEL.Services
 
             if (localidadeVM == null)
             {
-                throw new ArgumentNullException(nameof(localidadeVM), "Os dados da localidade são obrigatórios.");
+                throw new ArgumentNullException(nameof(localidadeVM));
             }
 
-            // Supondo que os valores zero ou negativos não sejam permitidos
             if (localidadeVM.CodigoLocalidade <= 0 || localidadeVM.EnderecoCodigo <= 0)
             {
                 throw new ArgumentException("Código da localidade ou do endereço é inválido.");
             }
 
-            // 1. Verifica se a localidade existe
             var localidade = await oRepositoryLocalidade.SelecionarChaveAsync(localidadeVM.CodigoLocalidade);
 
             if (localidade == null)
@@ -148,7 +146,6 @@ namespace SistemaDoacao.MODEL.Services
                 throw new Exception("Localidade não encontrada.");
             }
 
-            // 2. Verifica se o endereço associado existe
             var endereco = await oRepositoryEndereco.SelecionarChaveAsync(localidadeVM.EnderecoCodigo);
 
             if (endereco == null)
@@ -156,29 +153,23 @@ namespace SistemaDoacao.MODEL.Services
                 throw new Exception("Endereço associado não encontrado.");
             }
 
-            // 3. Começa uma transação se a tua camada de dados suporta
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    // 4. Exclui o endereço
                     await oRepositoryEndereco.ExcluirAsync(endereco);
 
-                    // 5. Exclui a localidade
                     await oRepositoryLocalidade.ExcluirAsync(localidade);
 
-                    // 6. Confirma a transação
                     await transaction.CommitAsync();
                 }
                 catch (Exception)
                 {
-                    // Em caso de erro, faz rollback da transação
                     await transaction.RollbackAsync();
                     throw;
                 }
             }
 
-            // 7. Retorna true se a exclusão foi bem-sucedida
             return true;
         }
 
