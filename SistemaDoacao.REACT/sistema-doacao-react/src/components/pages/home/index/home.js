@@ -50,10 +50,9 @@ const Home = () => {
         <ul className="menu">
           <li>Home</li>
           <li>Sobre Nós</li>
-          <li>Info</li>
         </ul>
         <ul className="login">
-          <a href="#">Login</a>
+		<button type="button" class="btn btn-primary btn-sm">Login</button>
         </ul>
       </header>
 
