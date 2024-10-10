@@ -1,45 +1,28 @@
-// import React from 'react'
-// import '../home/html css/home.css'
-
-// const Home = () => {
-// 	const map = L.map('map').setView([-22.95199282859533, -43.21107744478464], 16)
-
-// 	const layer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', {
-// 		minZoom: 0,
-// 		maxZoom: 16,
-// 		// attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-// 		ext: 'png'
-// 	});
-
-// 	layer.addTo(map)
-
-
-// 	const marker = L.marker([-22.95199282859533, -43.21107744478464])
-// 	marker.addTo(map)
-
-// }
-
-
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './style.css';
+import L from 'leaflet';
 import logo from './imagens/logo.jpeg';
+import 'leaflet/dist/leaflet.css';
 
 const Home = () => {
+  const mapRef = useRef(null); // Criando uma referência para o mapa
+  
+  useEffect(() => {
+    if (!mapRef.current) { // Verifica se o mapa já foi inicializado
+      mapRef.current = L.map('map').setView([-22.95199282859533, -43.21107744478464], 16);
 
-  	// const map = L.map('map').setView([-22.95199282859533, -43.21107744478464], 16)
+      const layer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', {
+        minZoom: 0,
+        maxZoom: 16,
+        ext: 'png',
+      });
 
-	// const layer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', {
-	// 	minZoom: 0,
-	// 	maxZoom: 16,
-	// 	// attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	// 	ext: 'png'
-	// });
+      layer.addTo(mapRef.current);
 
-	// layer.addTo(map)
-
-
-	// const marker = L.marker([-22.95199282859533, -43.21107744478464])
-	// marker.addTo(map)
+      const marker = L.marker([-22.95199282859533, -43.21107744478464]);
+      marker.addTo(mapRef.current);
+    }
+  }, []); 
 
   return (
     <div>
