@@ -40,7 +40,7 @@ namespace SistemaDoacao.MODEL.Services
                 CatNome = categoriaDTO.catNome,
                 CatDataRegistro = categoriaDTO.catDataRegistro
             };
-            await oRepositoryCategoria.IncluirAsync(categoria);
+            await oRepositoryCategoria.AlterarAsync(categoria);
         }
         public async Task ExcluirCategoriaDTO(int catCodigo)
         {

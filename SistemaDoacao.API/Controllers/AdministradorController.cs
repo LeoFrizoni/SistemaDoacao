@@ -1,12 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaDoacao.MODEL.DTO;
+using SistemaDoacao.MODEL.Models;
+using SistemaDoacao.MODEL.Services;
 
 namespace SistemaDoacao.API.Controllers
 {
-    public class AdministradorController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AdministradorController : ControllerBase
     {
-        public IActionResult Index()
+        private Sistema_DoacoesContext _context;
+        private ServiceAdministrador _Service;
+
+        public AdministradorController(Sistema_DoacoesContext context)
         {
-            return View();
+            _context = context;
+            _Service = new ServiceAdministrador(context);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _Service.oRepositoryAdministrador.SelecionarTodosAsync());
+        }
+
+        [HttpGet("GetADMById/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            return Ok(await _Service.oRepositoryAdministrador.SelecionarChaveAsync(id));
+        }
+
+        [HttpPost("PostADM")]
+        public async Task<IActionResult> Post(AdministradorDTO adm)
+        {
+            await _Service.IncluirAdmDTO(adm);
+            return Ok("ADM registrado");
+        }
+
+        [HttpPut("PutADM")]
+        public async Task<IActionResult> Put(AdministradorDTO adm)
+        {
+            await _Service.AlterarAdmDTO(adm);
+            return Ok("ADM Alterado");
+        }
+
+        [HttpDelete("DeleteADM/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _Service.ExcluirAdmDTO(id);
+                return Ok("ADM Excluido");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
