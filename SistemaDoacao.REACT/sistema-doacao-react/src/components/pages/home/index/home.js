@@ -1,11 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import './style.css';
+import './home.css';
 import L from 'leaflet';
 import logo from './imagens/logo.jpeg';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+
+	const navigate = useNavigate();
+  	const handleLoginClick = () => {
+		navigate('./login');
+  	};
+
   const mapRef = useRef(null); // Criando uma referência para o mapa
   
   useEffect(() => {
@@ -24,11 +30,6 @@ const Home = () => {
       marker.addTo(mapRef.current);
     }
   }, []); 
-
-  const navigate = useNavigate();
-  const handleLoginClick = () => {
-	navigate('./login/login');
-  };
 
   return (
     <div>

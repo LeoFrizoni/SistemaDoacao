@@ -1,15 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
+body, .container, .toggle-panel h1, .toggle-panel p, .toggle-panel a {
+    color: #000; 
+}
+
+.sign-in p, .sign-in input {
+    color: #333; 
+}
+
+.toggle-panel h1 {
+    color: #fff; 
+}
+
+
+
 body {
-    background-color: #ffffff; /* Fundo branco */
-    background: linear-gradient(to right, #ffffff, #ffffff); /* Gradiente alterado para branco */
+    background-color: #ffffff;
+    background: linear-gradient(to right, #ffffff, #ffffff);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,9 +30,9 @@ body {
 }
 
 .container {
-    background-color: #ffffff; /* Branco para o container */
+    background-color: #ffffff;
     border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Sombra mais suave */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
     width: 768px;
@@ -33,21 +45,23 @@ body {
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
+    color: #4a4a4a; 
 }
 
 .container span {
     font-size: 12px;
+    color: #4a4a4a; 
 }
 
 .container a {
-    color: #4a4a4a; /* Cinza escuro */
+    color: #4a4a4a;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
 
 .container button {
-    background-color: #28a745; /* Verde substituindo o azul */
+    background-color: #28a745;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -66,7 +80,7 @@ body {
 }
 
 .container form {
-    background-color: #fff; /* Branco para o formulário */
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +90,7 @@ body {
 }
 
 .container input {
-    background-color: #f0e3d2; /* Bege claro para os inputs */
+    background-color: #f0e3d2;
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
@@ -146,9 +160,9 @@ body {
 }
 
 .toggle {
-    background-color: #28a745; /* Verde substituindo o azul */
+    background-color: #28a745;
     height: 100%;
-    background: linear-gradient(to right, #66ff66, #28a745); /* Gradiente alterado para verde */
+    background: linear-gradient(to right, #66ff66, #28a745);
     color: #fff;
     position: relative;
     left: -100%;
