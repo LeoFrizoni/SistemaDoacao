@@ -12,10 +12,10 @@ const Home = () => {
 		navigate('./login');
   	};
 
-  const mapRef = useRef(null); // Criando uma referência para o mapa
+  const mapRef = useRef(null); // referência para o mapa
   
   useEffect(() => {
-    if (!mapRef.current) { // Verifica se o mapa já foi inicializado
+    if (!mapRef.current) { 
       mapRef.current = L.map('map').setView([-22.418767095221828, -44.280479276712484], 16);
 
       const layer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}', {
