@@ -5,12 +5,12 @@ import logo from './imagens/logo.jpeg';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
+export const Home = () => {
 
-	const navigate = useNavigate();
-  	const handleLoginClick = () => {
-		navigate('./login');
-  	};
+	// const navigate = useNavigate();
+  // 	const handleLoginClick = () => {
+	// 	navigate('./login');
+  // 	};
 
   const mapRef = useRef(null); // referência para o mapa
   
@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <div>
-      <header>
+      {/* <header>
         <div className="logo">
 			<img src={logo} alt="Logo" />
         </div>
@@ -42,9 +42,9 @@ const Home = () => {
           <li>Sobre Nós</li>
         </ul>
         <ul className="login">
-		<button type="button" class="btn btn-primary btn-sm" onClick={handleLoginClick}>Login</button>
+		      <button type="button" class="btn btn-primary btn-sm" onClick={handleLoginClick}>Login</button>
         </ul>
-      </header>
+      </header> */}
 
       <div className="home">
         <div className="logo-grande">

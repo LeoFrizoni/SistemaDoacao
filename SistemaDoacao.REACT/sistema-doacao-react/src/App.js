@@ -22,21 +22,23 @@
 //   );
 // }
 
-import React , {useEffect} from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from "./components/pages/home/index/home"
+import { Route, Routes } from "react-router-dom";
+import "./App.css"
+import Home from "./components/pages/home/index/home";
+import { Navbar } from "./components/pages/navbar/navbar";
 import Login from "./components/pages/login/login";
 
-const App = () => {
+function App() {
   return (
-    <Router>
+    <div className="App">
+      <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home></Home>} />
+      * <Route path="/login" element={<Login></Login>} /> 
       </Routes>
-    </Router>
-  );
-};
+    </div>
+  )
+}
 
 
 

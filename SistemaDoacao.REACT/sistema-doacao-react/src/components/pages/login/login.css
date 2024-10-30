@@ -22,7 +22,7 @@ body, .container, .toggle-panel h1, .toggle-panel p, .toggle-panel a {
 body {
     background-color: #ffffff;
     background: linear-gradient(to right, #ffffff, #ffffff);
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     flex-direction: column;
