@@ -7,11 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
 
-	// const navigate = useNavigate();
-  // 	const handleLoginClick = () => {
-	// 	navigate('./login');
-  // 	};
-
   const mapRef = useRef(null); // referência para o mapa
   
   useEffect(() => {
@@ -33,18 +28,6 @@ export const Home = () => {
 
   return (
     <div>
-      {/* <header>
-        <div className="logo">
-			<img src={logo} alt="Logo" />
-        </div>
-        <ul className="menu">
-          <li>Home</li>
-          <li>Sobre Nós</li>
-        </ul>
-        <ul className="login">
-		      <button type="button" class="btn btn-primary btn-sm" onClick={handleLoginClick}>Login</button>
-        </ul>
-      </header> */}
 
       <div className="home">
         <div className="logo-grande">
