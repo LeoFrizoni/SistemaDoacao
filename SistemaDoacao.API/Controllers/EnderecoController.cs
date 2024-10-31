@@ -24,7 +24,7 @@ namespace SistemaDoacao.API.Controllers
             return Ok(await _Service.oRepositoryEndereco.SelecionarTodosAsync());
         }
 
-        [HttpGet("GetCategoriaById/{id}")]
+        [HttpGet("GetEnderecoById/{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await _Service.oRepositoryEndereco.SelecionarChaveAsync(id));
