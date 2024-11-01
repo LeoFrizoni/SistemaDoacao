@@ -1,4 +1,3 @@
-import { name } from "file-loader";
 import Api from "../helpers/api";
 
 export async function GetLocalidade() {
@@ -22,5 +21,5 @@ export async function DeleteLocalidade(id) {
 }
 
 export async function GetLocalidadePorNome(name) {
-    return await Api.get(`/Localidade/GetLocalidadeByName/${name}]`)
+    return await Api.get(`/Localidade/GetLocalidadeByName${name}`)
 }

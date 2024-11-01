@@ -30,7 +30,7 @@
 
 import React from "react";
 import './navbar.css'
-import logo from './imagens/logo.jpeg'
+import logo from './imagens/logo.png'
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
@@ -60,6 +60,6 @@ export const Navbar = () => {
                 </Link>
             </div>
         </header>
-
+        
     );
 };

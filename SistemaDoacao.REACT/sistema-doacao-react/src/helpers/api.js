@@ -1,4 +1,4 @@
-import 'axios'
+import axios from 'axios';
 
 var urlBase = "http://localhost:5213/api"
     const Api = axios.create({
