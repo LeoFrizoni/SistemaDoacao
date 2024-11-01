@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-var urlBase = "http://localhost:5213/api"
-    const Api = axios.create({
-        baseUrl : urlBase
-    })
+const urlBase = "http://localhost:5213/api"; 
+const Api = axios.create({
+    baseURL: urlBase 
+});
 
-    export default Api;
+export default Api;

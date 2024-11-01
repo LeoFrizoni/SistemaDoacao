@@ -1,25 +1,25 @@
 import Api from "../helpers/api";
 
 export async function GetLocalidade() {
-    return await Api.get("/Localidade");
+    return await Api.get("/localidade");
 }
 
 export async function GetLocalidadeById(id) {
-    return await Api.get(`/Localidade/GetLocalidadeById/${id}`);
+    return await Api.get(`/localidade/getlocalidadebyid/${id}`);
 }
 
 export async function PostLocalidade(localidade) {
-    return await Api.post("/Localidade/PostLocalidade", localidade);
+    return await Api.post("/localidade/postlocalidade", localidade);
 }
 
 export async function PutLocalidade(localidade) {
-    return await Api.put("/Localidade/PutLocalidade", localidade);
+    return await Api.put("/localidade/putlocalidade", localidade);
 }
 
 export async function DeleteLocalidade(id) {
-    return await Api.delete(`/Localidade/DeleteLocalidade/${id}`);
+    return await Api.delete(`/localidade/deletelocalidade/${id}`);
 }
 
 export async function GetLocalidadePorNome(name) {
-    return await Api.get(`/Localidade/GetLocalidadeByName${name}`)
+    return await Api.get(`/localidade/getlocalidadeByName${name}`)
 }
