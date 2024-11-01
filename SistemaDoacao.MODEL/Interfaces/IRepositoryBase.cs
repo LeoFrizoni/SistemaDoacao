@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDoacao.MODEL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +22,7 @@ namespace SistemaDoacao.MODEL.Interfaces
         Task<List<T>> SelecionarTodosAsync();
         Task ExcluirAsync(T obj);
         Task ExcluirAsync(params object[] var);
+        Task<LOCALIDADE> SelecionarPorNomeAsync(string nome);
+
     }
 }

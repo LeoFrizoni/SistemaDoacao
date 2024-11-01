@@ -31,6 +31,13 @@ namespace SistemaDoacao.API.Controllers
             return Ok(await _Service.oRepositoryLocalidade.SelecionarChaveAsync(id));
         }
 
+        [HttpGet("GetLocalidadeByName/{name}")]
+        public async Task<IActionResult> Get(string name)
+        {
+            var resultado = await _Service.oRepositoryLocalidade.SelecionarPorNomeAsync(name);
+            return Ok(resultado);
+        }
+
         [HttpPost("PostLocalidade")]
         public async Task<IActionResult> Post(LocalidadeDTO localidade)
         {

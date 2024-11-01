@@ -114,5 +114,13 @@ namespace SistemaDoacao.MODEL.Repository
         {
             return await _context.Set<T>().ToListAsync();
         }
+
+
+        //EXCLUSIVAMENTE PARA PESQUISA DE NOME DA LOCALIDADE
+        public async Task<LOCALIDADE> SelecionarPorNomeAsync(string nome)
+        {
+            return await _context.Set<LOCALIDADE>().FirstOrDefaultAsync(l => l.LocNome == nome);
+        }
+
     }
 }
