@@ -11,8 +11,6 @@ public partial class ENDERECO
 
     public int EndCodigoLocalidade { get; set; }
 
-    public string EndCEP { get; set; }
-
     public string EndCidade { get; set; }
 
     public string EndBairro { get; set; }

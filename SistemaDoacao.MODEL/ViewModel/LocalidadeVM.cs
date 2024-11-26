@@ -47,7 +47,6 @@ namespace SistemaDoacao.MODEL.ViewModel
                               Longitude = loc.LocLongitude,
                               EnderecoCodigo = end.EndCodigo,
                               EnderecoLocCodigo = end.EndCodigoLocalidade,
-                              CEP = end.EndCEP,
                               Cidade = end.EndCidade,
                               Bairro = end.EndBairro,
                               Logradouro = end.EndLogradouro,

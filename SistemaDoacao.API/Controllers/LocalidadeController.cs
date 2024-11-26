@@ -31,10 +31,10 @@ namespace SistemaDoacao.API.Controllers
             return Ok(await _Service.oRepositoryLocalidade.SelecionarChaveAsync(id));
         }
 
-        [HttpGet("GetLocalidadeByName/{name}")]
-        public async Task<IActionResult> Get(string name)
+        [HttpGet("GetLocalidadeByCEP/{cep}")]
+        public async Task<IActionResult> Get(string cep)
         {
-            var resultado = await _Service.oRepositoryLocalidade.SelecionarPorNomeAsync(name);
+            var resultado = await _Service.oRepositoryLocalidade.SelecionarPeloCEP(cep);
             return Ok(resultado);
         }
 

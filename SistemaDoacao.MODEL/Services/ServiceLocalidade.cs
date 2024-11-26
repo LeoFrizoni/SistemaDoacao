@@ -30,6 +30,7 @@ namespace SistemaDoacao.MODEL.Services
             var localidade = new LOCALIDADE()
             {
                 LocCodigo = localidadeDTO.locCodigo,
+                LocCEP = localidadeDTO.locCEP,
                 LocNome = localidadeDTO.locNome,
                 LocDescricao = localidadeDTO.locDescricao,
                 LocLatitude = localidadeDTO.locLatidude,
@@ -44,6 +45,7 @@ namespace SistemaDoacao.MODEL.Services
             var localidade = new LOCALIDADE()
             {
                 LocCodigo = localidadeDTO.locCodigo,
+                LocCEP = localidadeDTO.locCEP,
                 LocNome = localidadeDTO.locNome,
                 LocDescricao = localidadeDTO.locDescricao,
                 LocLatitude = localidadeDTO.locLatidude,

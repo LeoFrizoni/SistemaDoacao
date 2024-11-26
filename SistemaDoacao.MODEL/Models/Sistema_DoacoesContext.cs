@@ -33,7 +33,7 @@ public partial class Sistema_DoacoesContext : DbContext
     {
         modelBuilder.Entity<ADMINISTRADOR>(entity =>
         {
-            entity.HasKey(e => e.AdmCodigo).HasName("PK__ADMINIST__BB1662F50C8352D5");
+            entity.HasKey(e => e.AdmCodigo).HasName("PK__ADMINIST__BB1662F5602C8FB1");
 
             entity.ToTable("ADMINISTRADOR");
 
@@ -49,7 +49,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<CATEGORIA>(entity =>
         {
-            entity.HasKey(e => e.CatCodigo).HasName("PK__CATEGORI__16498BD9007DC73D");
+            entity.HasKey(e => e.CatCodigo).HasName("PK__CATEGORI__16498BD983F1A6AC");
 
             entity.ToTable("CATEGORIA");
 
@@ -71,7 +71,7 @@ public partial class Sistema_DoacoesContext : DbContext
                         .HasConstraintName("FK__CATEGORIA__CLCod__3F466844"),
                     j =>
                     {
-                        j.HasKey("CLCodigoCategoria", "CLCodigoLocalidade").HasName("PK__CATEGORI__5353452674E7C609");
+                        j.HasKey("CLCodigoCategoria", "CLCodigoLocalidade").HasName("PK__CATEGORI__5353452688562275");
                         j.ToTable("CATEGORIA_LOCALIDADE");
                         j.HasIndex(new[] { "CLCodigoCategoria" }, "CATEGORIA_LOCALIDADE_FKIndex1");
                         j.HasIndex(new[] { "CLCodigoLocalidade" }, "CATEGORIA_LOCALIDADE_FKIndex2");
@@ -80,7 +80,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<ENDERECO>(entity =>
         {
-            entity.HasKey(e => e.EndCodigo).HasName("PK__ENDERECO__4EB6A165C39A56C6");
+            entity.HasKey(e => e.EndCodigo).HasName("PK__ENDERECO__4EB6A165884E5858");
 
             entity.ToTable("ENDERECO");
 
@@ -89,10 +89,6 @@ public partial class Sistema_DoacoesContext : DbContext
             entity.Property(e => e.EndBairro)
                 .IsRequired()
                 .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.EndCEP)
-                .IsRequired()
-                .HasMaxLength(9)
                 .IsUnicode(false);
             entity.Property(e => e.EndCidade)
                 .IsRequired()
@@ -114,10 +110,14 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<LOCALIDADE>(entity =>
         {
-            entity.HasKey(e => e.LocCodigo).HasName("PK__LOCALIDA__897DF110A1186AD9");
+            entity.HasKey(e => e.LocCodigo).HasName("PK__LOCALIDA__897DF1107EFD407B");
 
             entity.ToTable("LOCALIDADE");
 
+            entity.Property(e => e.LocCEP)
+                .IsRequired()
+                .HasMaxLength(9)
+                .IsUnicode(false);
             entity.Property(e => e.LocDescricao)
                 .HasMaxLength(200)
                 .IsUnicode(false);

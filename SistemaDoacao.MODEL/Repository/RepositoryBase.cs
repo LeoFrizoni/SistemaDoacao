@@ -116,11 +116,15 @@ namespace SistemaDoacao.MODEL.Repository
         }
 
 
-        //EXCLUSIVAMENTE PARA PESQUISA DE NOME DA LOCALIDADE
+        //EXCLUSIVAMENTE PARA PESQUISA DE NOME E CEP DA LOCALIDADE
         public async Task<LOCALIDADE> SelecionarPorNomeAsync(string nome)
         {
             return await _context.Set<LOCALIDADE>().FirstOrDefaultAsync(l => l.LocNome == nome);
         }
 
+        public async Task<LOCALIDADE> SelecionarPeloCEP(string cep)
+        {
+            return await _context.Set<LOCALIDADE>().FirstOrDefaultAsync(l => l.LocCEP == cep);
+        }
     }
 }

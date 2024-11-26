@@ -9,6 +9,7 @@ namespace SistemaDoacao.MODEL.DTO
     public class LocalidadeDTO
     {
         public int locCodigo { get; set; }
+        public string locCEP { get; set; }
         public string locNome { get; set; }
         public string locDescricao { get; set; }
         public string locSite { get; set; }

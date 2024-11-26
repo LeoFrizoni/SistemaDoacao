@@ -9,6 +9,8 @@ public partial class LOCALIDADE
 {
     public int LocCodigo { get; set; }
 
+    public string LocCEP { get; set; }
+
     public string LocNome { get; set; }
 
     public string LocDescricao { get; set; }

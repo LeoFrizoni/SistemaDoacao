@@ -10,7 +10,6 @@ namespace SistemaDoacao.MODEL.DTO
     {
         public int endCodigo {  get; set; }
         public int endCodigoLocalidade { get; set; }
-        public string endCEP { get; set; }
         public string endCidade { get; set; }
         public string endLogradouro { get; set; }
         public int endNumero { get; set; }
