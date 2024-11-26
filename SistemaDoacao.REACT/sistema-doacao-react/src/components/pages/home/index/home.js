@@ -3,35 +3,12 @@ import './home.css';
 import L from 'leaflet';
 import logo from './imagens/logo.png';
 import 'leaflet/dist/leaflet.css';
-import { GetLocalidade } from '../../../../services/serviceLocalidade';
+import { GetLocalidadePorNome } from '../../../../services/serviceLocalidade';
 
 export const Home = () => {
   const [coordenadas, setCoordenadas] = useState([0, 0]);
-  const mapRef = useRef(null);
-  const markerRef = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await GetLocalidade();
-        
-        sessionStorage.setItem('localidadeData', JSON.stringify(response.data));
-        
-        // Exibe os dados carregados no console
-        console.log("Dados carregados e armazenados no cache:", response.data);
-        
-        if (response.data && response.data.locCoordenada) {
-          const coordsString = response.data.locCoordenada;
-          const [latitude, longitude] = coordsString.split(',').map(coord => parseFloat(coord.trim()));
-          setCoordenadas([latitude, longitude]);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados de localidade:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const mapRef = useRef(null); // referência para o mapa
+  const markerRef = useRef(null); // referência para o marcador
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -54,6 +31,7 @@ export const Home = () => {
     mapRef.current.setView(coordenadas, 16);
   }, [coordenadas]);
 
+  
   return (
     <div>
       <div className="home">
@@ -62,10 +40,17 @@ export const Home = () => {
         </div>
 
         <form>
-          <div className="search">
-            <span className="search-icon material-symbols-outlined">search</span>
-            <input className="search-input" type="search" placeholder="Search" />
-          </div>
+          <div className="search"> 
+            <span className="search-icon material-symbols-outlined">search</span> 
+            <input 
+              className="search-input" 
+              type="search" 
+              placeholder="Search" 
+            />
+            {/* <button type="submit" className="search-button" aria-label="Buscar">
+              <span className="material-symbols-outlined">search</span>
+            </button> */}
+          </div> 
         </form>
 
         <div className="container">

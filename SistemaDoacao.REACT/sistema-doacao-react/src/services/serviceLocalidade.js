@@ -20,6 +20,6 @@ export async function DeleteLocalidade(id) {
     return await Api.delete(`/localidade/deletelocalidade/${id}`);
 }
 
-export async function GetLocalidadePorNome(name) {
-    return await Api.get(`/localidade/getlocalidadeByName${name}`)
+export async function GetLocalidadeByCEP(cep) {
+    return await Api.get(`/localidade/getlocalidadeByCEP${cep}`)
 }
