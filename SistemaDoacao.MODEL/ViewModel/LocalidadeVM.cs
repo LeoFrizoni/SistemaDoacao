@@ -16,7 +16,8 @@ namespace SistemaDoacao.MODEL.ViewModel
         public string NomeLocalidade { get; set; }
         public string DescricaoLocalidade {  get; set; }
         public string SiteLocalidade { get; set; }
-        public string CoordenadaLocalidade { get; set; }
+        public string Latitude   { get; set; }
+        public string Longitude { get; set; }
         
         // Endereco
         
@@ -42,7 +43,8 @@ namespace SistemaDoacao.MODEL.ViewModel
                               NomeLocalidade = loc.LocNome,
                               DescricaoLocalidade = loc.LocDescricao,
                               SiteLocalidade = loc.LocSite,
-                              CoordenadaLocalidade = loc.LocCoordenada,
+                              Latitude = loc.LocLatitude,
+                              Longitude = loc.LocLongitude,
                               EnderecoCodigo = end.EndCodigo,
                               EnderecoLocCodigo = end.EndCodigoLocalidade,
                               CEP = end.EndCEP,

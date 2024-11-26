@@ -15,7 +15,9 @@ public partial class LOCALIDADE
 
     public string LocSite { get; set; }
 
-    public string LocCoordenada { get; set; }
+    public string LocLatitude { get; set; }
+
+    public string LocLongitude { get; set; }
 
     public virtual ICollection<ENDERECO> ENDERECOs { get; set; } = new List<ENDERECO>();
 

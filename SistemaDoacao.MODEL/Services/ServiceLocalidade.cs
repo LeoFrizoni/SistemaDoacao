@@ -32,7 +32,8 @@ namespace SistemaDoacao.MODEL.Services
                 LocCodigo = localidadeDTO.locCodigo,
                 LocNome = localidadeDTO.locNome,
                 LocDescricao = localidadeDTO.locDescricao,
-                LocCoordenada = localidadeDTO.locCoordenada,
+                LocLatitude = localidadeDTO.locLatidude,
+                LocLongitude = localidadeDTO.locLongitude,
                 LocSite = localidadeDTO.locSite
             };
             await oRepositoryLocalidade.IncluirAsync(localidade);
@@ -45,7 +46,8 @@ namespace SistemaDoacao.MODEL.Services
                 LocCodigo = localidadeDTO.locCodigo,
                 LocNome = localidadeDTO.locNome,
                 LocDescricao = localidadeDTO.locDescricao,
-                LocCoordenada = localidadeDTO.locCoordenada,
+                LocLatitude = localidadeDTO.locLatidude,
+                LocLongitude = localidadeDTO.locLongitude,
                 LocSite = localidadeDTO.locSite
             };
             await oRepositoryLocalidade.AlterarAsync(localidade);
@@ -66,112 +68,112 @@ namespace SistemaDoacao.MODEL.Services
 
         //UTILIZANDO ViewModel
 
-        public async Task<LocalidadeVM> IncluirLocalidadeAsyncVM(LocalidadeVM localidadeVM)
-        {
-            var localidade = new LOCALIDADE()
-            {
-                LocCodigo = localidadeVM.CodigoLocalidade,
-                LocNome = localidadeVM.NomeLocalidade,
-                LocDescricao = localidadeVM.DescricaoLocalidade,
-                LocSite = localidadeVM.SiteLocalidade,
-                LocCoordenada = localidadeVM.CoordenadaLocalidade
-            };
-            await oRepositoryLocalidade.IncluirAsync(localidade);
+        //public async Task<LocalidadeVM> IncluirLocalidadeAsyncVM(LocalidadeVM localidadeVM)
+        //{
+        //    var localidade = new LOCALIDADE()
+        //    {
+        //        LocCodigo = localidadeVM.CodigoLocalidade,
+        //        LocNome = localidadeVM.NomeLocalidade,
+        //        LocDescricao = localidadeVM.DescricaoLocalidade,
+        //        LocSite = localidadeVM.SiteLocalidade,
+        //        LocCoordenada = localidadeVM.CoordenadaLocalidade
+        //    };
+        //    await oRepositoryLocalidade.IncluirAsync(localidade);
 
-            var endereco = new ENDERECO()
-            {
-                EndCodigo = localidadeVM.EnderecoCodigo,
-                EndCEP = localidadeVM.CEP,
-                EndCidade = localidadeVM.Cidade,
-                EndBairro = localidadeVM.Bairro,
-                EndComplemento = localidadeVM.Complemento,
-                EndLogradouro = localidadeVM.Logradouro,
-                EndNumero = localidadeVM.Numero,
-                EndDataRegistro = localidadeVM.DataRegistroEndereco
-            };
+        //    var endereco = new ENDERECO()
+        //    {
+        //        EndCodigo = localidadeVM.EnderecoCodigo,
+        //        EndCEP = localidadeVM.CEP,
+        //        EndCidade = localidadeVM.Cidade,
+        //        EndBairro = localidadeVM.Bairro,
+        //        EndComplemento = localidadeVM.Complemento,
+        //        EndLogradouro = localidadeVM.Logradouro,
+        //        EndNumero = localidadeVM.Numero,
+        //        EndDataRegistro = localidadeVM.DataRegistroEndereco
+        //    };
 
             
-            await oRepositoryEndereco.IncluirAsync(endereco);
+        //    await oRepositoryEndereco.IncluirAsync(endereco);
             
 
-            return localidadeVM;
-        }
+        //    return localidadeVM;
+        //}
 
-        public async Task<LocalidadeVM> AlterarLocalidadeAsyncVM(LocalidadeVM localidadeVM)
-        {
-            var localidade = new LOCALIDADE()
-            {
-                LocCodigo = localidadeVM.CodigoLocalidade,
-                LocNome = localidadeVM.NomeLocalidade,
-                LocDescricao = localidadeVM.DescricaoLocalidade,
-                LocSite = localidadeVM.SiteLocalidade,
-                LocCoordenada = localidadeVM.CoordenadaLocalidade
-            };
+        //public async Task<LocalidadeVM> AlterarLocalidadeAsyncVM(LocalidadeVM localidadeVM)
+        //{
+        //    var localidade = new LOCALIDADE()
+        //    {
+        //        LocCodigo = localidadeVM.CodigoLocalidade,
+        //        LocNome = localidadeVM.NomeLocalidade,
+        //        LocDescricao = localidadeVM.DescricaoLocalidade,
+        //        LocSite = localidadeVM.SiteLocalidade,
+        //        LocCoordenada = localidadeVM.CoordenadaLocalidade
+        //    };
 
-            var endereco = new ENDERECO()
-            {
-                EndCodigo = localidadeVM.EnderecoCodigo,
-                EndCEP = localidadeVM.CEP,
-                EndCidade = localidadeVM.Cidade,
-                EndBairro = localidadeVM.Bairro,
-                EndComplemento = localidadeVM.Complemento,
-                EndLogradouro = localidadeVM.Logradouro,
-                EndNumero = localidadeVM.Numero,
-                EndDataRegistro = localidadeVM.DataRegistroEndereco
-            };
+        //    var endereco = new ENDERECO()
+        //    {
+        //        EndCodigo = localidadeVM.EnderecoCodigo,
+        //        EndCEP = localidadeVM.CEP,
+        //        EndCidade = localidadeVM.Cidade,
+        //        EndBairro = localidadeVM.Bairro,
+        //        EndComplemento = localidadeVM.Complemento,
+        //        EndLogradouro = localidadeVM.Logradouro,
+        //        EndNumero = localidadeVM.Numero,
+        //        EndDataRegistro = localidadeVM.DataRegistroEndereco
+        //    };
 
-            await oRepositoryLocalidade.AlterarAsync(localidade);
-            await oRepositoryEndereco.AlterarAsync(endereco);
+        //    await oRepositoryLocalidade.AlterarAsync(localidade);
+        //    await oRepositoryEndereco.AlterarAsync(endereco);
 
-            return localidadeVM;
-        }
+        //    return localidadeVM;
+        //}
 
-        public async Task<bool> ExcluirLocalidadeAsyncVM(LocalidadeVM localidadeVM)
-        {
+        //public async Task<bool> ExcluirLocalidadeAsyncVM(LocalidadeVM localidadeVM)
+        //{
 
-            if (localidadeVM == null)
-            {
-                throw new ArgumentNullException(nameof(localidadeVM));
-            }
+        //    if (localidadeVM == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(localidadeVM));
+        //    }
 
-            if (localidadeVM.CodigoLocalidade <= 0 || localidadeVM.EnderecoCodigo <= 0)
-            {
-                throw new ArgumentException("Código da localidade ou do endereço é inválido.");
-            }
+        //    if (localidadeVM.CodigoLocalidade <= 0 || localidadeVM.EnderecoCodigo <= 0)
+        //    {
+        //        throw new ArgumentException("Código da localidade ou do endereço é inválido.");
+        //    }
 
-            var localidade = await oRepositoryLocalidade.SelecionarChaveAsync(localidadeVM.CodigoLocalidade);
+        //    var localidade = await oRepositoryLocalidade.SelecionarChaveAsync(localidadeVM.CodigoLocalidade);
 
-            if (localidade == null)
-            {
-                throw new Exception("Localidade não encontrada.");
-            }
+        //    if (localidade == null)
+        //    {
+        //        throw new Exception("Localidade não encontrada.");
+        //    }
 
-            var endereco = await oRepositoryEndereco.SelecionarChaveAsync(localidadeVM.EnderecoCodigo);
+        //    var endereco = await oRepositoryEndereco.SelecionarChaveAsync(localidadeVM.EnderecoCodigo);
 
-            if (endereco == null)
-            {
-                throw new Exception("Endereço associado não encontrado.");
-            }
+        //    if (endereco == null)
+        //    {
+        //        throw new Exception("Endereço associado não encontrado.");
+        //    }
 
-            using (var transaction = _context.Database.BeginTransaction())
-            {
-                try
-                {
-                    await oRepositoryEndereco.ExcluirAsync(endereco);
+        //    using (var transaction = _context.Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            await oRepositoryEndereco.ExcluirAsync(endereco);
 
-                    await oRepositoryLocalidade.ExcluirAsync(localidade);
+        //            await oRepositoryLocalidade.ExcluirAsync(localidade);
 
-                    await transaction.CommitAsync();
-                }
-                catch (Exception)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            }
+        //            await transaction.CommitAsync();
+        //        }
+        //        catch (Exception)
+        //        {
+        //            await transaction.RollbackAsync();
+        //            throw;
+        //        }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
 
     }

@@ -27,13 +27,13 @@ public partial class Sistema_DoacoesContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=PC_MARCO_RYAN\\SQLEXPRESS;Initial Catalog=Sistema_Doacoes;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=PC_MARCO_RYAN\\SQLEXPRESS;Initial Catalog=Doacoes;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ADMINISTRADOR>(entity =>
         {
-            entity.HasKey(e => e.AdmCodigo).HasName("PK__ADMINIST__BB1662F5C1BC12C1");
+            entity.HasKey(e => e.AdmCodigo).HasName("PK__ADMINIST__BB1662F50C8352D5");
 
             entity.ToTable("ADMINISTRADOR");
 
@@ -49,7 +49,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<CATEGORIA>(entity =>
         {
-            entity.HasKey(e => e.CatCodigo).HasName("PK__CATEGORI__16498BD9E661C047");
+            entity.HasKey(e => e.CatCodigo).HasName("PK__CATEGORI__16498BD9007DC73D");
 
             entity.ToTable("CATEGORIA");
 
@@ -71,7 +71,7 @@ public partial class Sistema_DoacoesContext : DbContext
                         .HasConstraintName("FK__CATEGORIA__CLCod__3F466844"),
                     j =>
                     {
-                        j.HasKey("CLCodigoCategoria", "CLCodigoLocalidade").HasName("PK__CATEGORI__5353452654855370");
+                        j.HasKey("CLCodigoCategoria", "CLCodigoLocalidade").HasName("PK__CATEGORI__5353452674E7C609");
                         j.ToTable("CATEGORIA_LOCALIDADE");
                         j.HasIndex(new[] { "CLCodigoCategoria" }, "CATEGORIA_LOCALIDADE_FKIndex1");
                         j.HasIndex(new[] { "CLCodigoLocalidade" }, "CATEGORIA_LOCALIDADE_FKIndex2");
@@ -80,7 +80,7 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<ENDERECO>(entity =>
         {
-            entity.HasKey(e => e.EndCodigo).HasName("PK__ENDERECO__4EB6A1655226B267");
+            entity.HasKey(e => e.EndCodigo).HasName("PK__ENDERECO__4EB6A165C39A56C6");
 
             entity.ToTable("ENDERECO");
 
@@ -114,15 +114,19 @@ public partial class Sistema_DoacoesContext : DbContext
 
         modelBuilder.Entity<LOCALIDADE>(entity =>
         {
-            entity.HasKey(e => e.LocCodigo).HasName("PK__LOCALIDA__897DF110DFC1143A");
+            entity.HasKey(e => e.LocCodigo).HasName("PK__LOCALIDA__897DF110A1186AD9");
 
             entity.ToTable("LOCALIDADE");
 
-            entity.Property(e => e.LocCoordenada)
+            entity.Property(e => e.LocDescricao)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.LocLatitude)
                 .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
-            entity.Property(e => e.LocDescricao)
+            entity.Property(e => e.LocLongitude)
+                .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
             entity.Property(e => e.LocNome)
