@@ -1,0 +1,47 @@
+main {
+    padding: 20px;
+}
+
+h2, h3 {
+    text-align: center;
+    color: white;
+}
+
+.text-container, .imagem {
+    background-color: #3b83bd; 
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px; 
+    max-width: 1200px; 
+    color: white;
+    box-sizing: border-box; 
+}
+
+.text-container p {
+    line-height: 1.6;
+}
+
+.imagem {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.imagem figure {
+    text-align: center;
+    margin: 0;
+}
+
+.imagem img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+}
+
+.imagem figcaption {
+    margin-top: 10px;
+    font-size: 16px;
+    color: white;
+}
