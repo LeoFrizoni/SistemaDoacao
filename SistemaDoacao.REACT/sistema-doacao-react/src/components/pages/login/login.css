@@ -208,3 +208,20 @@ body {
     transform: translateX(200%);
 }
 
+.toggle-panel h1, 
+.toggle-panel p, 
+.toggle-panel a {
+    color: #fff; /* Garantindo que todo o texto dentro do painel tenha a cor branca */
+}
+
+.container.active .toggle-left h1,
+.container.active .toggle-left p,
+.container.active .toggle-left a {
+    color: #fff; /* Quando o painel for ativado à esquerda, o texto permanece branco */
+}
+
+.container.active .toggle-right h1,
+.container.active .toggle-right p,
+.container.active .toggle-right a {
+    color: #fff; /* Quando o painel for ativado à direita, o texto também permanece branco */
+}

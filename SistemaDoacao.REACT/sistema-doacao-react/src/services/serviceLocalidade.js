@@ -21,5 +21,5 @@ export async function DeleteLocalidade(id) {
 }
 
 export async function GetLocalidadeByCEP(cep) {
-    return await Api.get(`/localidade/getlocalidadeByCEP${cep}`)
+    return await Api.get(`/localidade/GetLocalidadeByCEP/${cep}`)
 }

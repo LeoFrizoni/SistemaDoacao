@@ -1,4 +1,8 @@
-﻿body {
+﻿body::-webkit-scrollbar {
+    display: none; 
+}
+
+body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     background-color: #082f4d; 
@@ -71,3 +75,19 @@
     border: 5px solid white; 
     border-radius: 8px; 
 }
+
+
+.search-button {
+    border: none; 
+    background: none; 
+    cursor: pointer; 
+    padding: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-button:focus {
+    outline: none; 
+  }
+  
