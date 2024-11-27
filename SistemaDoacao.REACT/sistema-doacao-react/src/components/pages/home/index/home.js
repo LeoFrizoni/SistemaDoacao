@@ -8,11 +8,11 @@ import { GetLocalidadeByCEP } from '../../../../services/serviceLocalidade';
 export const Home = () => {
   const [cep, setCep] = useState(''); // Armazena o CEP digitado
   const mapRef = useRef(null); // Referência ao mapa
-  const markerRef = useRef([]); // Referência aos marcadores (agora uma lista)
+  const markerRef = useRef([]); // Referência aos marcadores
 
   useEffect(() => {
     if (!mapRef.current) {
-      mapRef.current = L.map('map').setView([-22.48237164267948, -44.473069690478276], 16); // Valores iniciais
+      mapRef.current = L.map('map').setView([-22.48237164267948, -44.473069690478276], 16); 
 
       const layer = L.tileLayer(
         'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}',
