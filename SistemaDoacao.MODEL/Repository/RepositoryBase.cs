@@ -122,9 +122,9 @@ namespace SistemaDoacao.MODEL.Repository
             return await _context.Set<LOCALIDADE>().FirstOrDefaultAsync(l => l.LocNome == nome);
         }
 
-        public async Task<LOCALIDADE> SelecionarPeloCEP(string cep)
+        public async Task<List<LOCALIDADE>> SelecionarPeloCEP(string cep)
         {
-            return await _context.Set<LOCALIDADE>().FirstOrDefaultAsync(l => l.LocCEP == cep);
+            return await _context.Set<LOCALIDADE>().Where(l => l.LocCEP == cep).ToListAsync();
         }
     }
 }
