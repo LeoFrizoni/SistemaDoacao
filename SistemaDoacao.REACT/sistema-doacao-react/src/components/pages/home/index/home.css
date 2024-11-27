@@ -91,3 +91,34 @@ body {
     outline: none; 
   }
   
+  .list-container {
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+    padding: 10px;
+    border-left: 2px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  .list-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .list-item p {
+    margin: 5px 0;
+  }
+  
+  .list-item a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .list-item a:hover {
+    text-decoration: underline;
+  }
+  

@@ -4,15 +4,24 @@ import L from 'leaflet';
 import logo from './imagens/logo.png';
 import 'leaflet/dist/leaflet.css';
 import { GetLocalidadeByCEP } from '../../../../services/serviceLocalidade';
+import { GetEndereco } from '../../../../services/serviceEndereco';
+import { GetLocalidade } from '../../../../services/serviceLocalidade';
 
 export const Home = () => {
-  const [cep, setCep] = useState(''); // Armazena o CEP digitado
-  const mapRef = useRef(null); // Referência ao mapa
-  const markerRef = useRef([]); // Referência aos marcadores
+  const [cep, setCep] = useState('');
+  const [cacheEnderecos, setCacheEnderecos] = useState([]);
+  const [cacheLocalidades, setCacheLocalidades] = useState([]);
+  const [enderecosFiltrados, setEnderecosFiltrados] = useState([]);
+  const mapRef = useRef(null);
+  const markerRef = useRef([]);
 
   useEffect(() => {
+    // Carregar endereços e localidades assim que a página carrega
+    carregarCacheEnderecos();
+    carregarCacheLocalidades();
+    
     if (!mapRef.current) {
-      mapRef.current = L.map('map').setView([-22.48237164267948, -44.473069690478276], 16); 
+      mapRef.current = L.map('map').setView([-22.48237164267948, -44.473069690478276], 16);
 
       const layer = L.tileLayer(
         'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}',
@@ -27,6 +36,37 @@ export const Home = () => {
     }
   }, []);
 
+  // Carregar os Endereços da API
+  const carregarCacheEnderecos = async () => {
+    try {
+      const response = await GetEndereco();
+      if (response && response.data && response.data.length > 0) {
+        setCacheEnderecos(response.data);
+        console.log('Cache de Endereços carregado:', response.data);
+      } else {
+        console.warn('Nenhum registro encontrado na tabela Endereco.');
+      }
+    } catch (error) {
+      console.error('Erro ao carregar o cache de Endereços:', error);
+    }
+  };
+
+  // Carregar as Localidades da API
+  const carregarCacheLocalidades = async () => {
+    try {
+      const response = await GetLocalidade();
+      if (response && response.data && response.data.length > 0) {
+        setCacheLocalidades(response.data);
+        console.log('Cache de Localidades carregado:', response.data);
+      } else {
+        console.warn('Nenhum registro encontrado na tabela Localidade.');
+      }
+    } catch (error) {
+      console.error('Erro ao carregar o cache de Localidades:', error);
+    }
+  };
+
+  // Formatar o CEP
   const formatarCEP = (valor) => {
     return valor.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2').slice(0, 9);
   };
@@ -36,9 +76,9 @@ export const Home = () => {
     setCep(valorFormatado);
   };
 
+  // Realizar a busca de Localidade e carregar os dados
   const handleSearch = async (e) => {
-    e.preventDefault(); 
-
+    e.preventDefault();
     const cepRegex = /^\d{5}-\d{3}$/;
     if (!cepRegex.test(cep)) {
       console.error('Formato de CEP inválido. Use o formato 00000-000.');
@@ -46,25 +86,33 @@ export const Home = () => {
     }
 
     try {
-      const response = await GetLocalidadeByCEP(cep);
-
-      if (response && response.data && response.data.length > 0) {
-        console.log('Resposta da API:', response.data);
-
-        const locais = response.data;
-
+      // Busca de Localidade pelo CEP
+      const localidadeResponse = await GetLocalidadeByCEP(cep);
+      if (localidadeResponse && localidadeResponse.data && localidadeResponse.data.length > 0) {
+        const locais = localidadeResponse.data;
         const { locLatitude, locLongitude } = locais[0];
+        
+        // Atualiza o mapa com as localidades encontradas
         if (locLatitude && locLongitude) {
           atualizarMapa(locLatitude, locLongitude, locais);
         }
+
+        // Filtra os endereços que estão relacionados às localidades encontradas
+        const localidadesEncontradas = locais.map((local) => local.locCodigo);
+        const enderecosFiltrados = cacheEnderecos.filter((endereco) =>
+          localidadesEncontradas.includes(endereco.endCodigoLocalidade)
+        );
+        setEnderecosFiltrados(enderecosFiltrados);
       } else {
         console.error('Nenhum dado encontrado para o CEP informado.');
+        setEnderecosFiltrados([]);  // Limpa os endereços ao não encontrar localidades
       }
     } catch (error) {
       console.error('Erro ao buscar os dados do serviço:', error);
     }
   };
 
+  // Atualiza a posição do mapa com as localidades
   const atualizarMapa = (latitude, longitude, locais) => {
     const lat = parseFloat(latitude);
     const lng = parseFloat(longitude);
@@ -82,7 +130,6 @@ export const Home = () => {
 
       if (!isNaN(markerLat) && !isNaN(markerLng)) {
         const marker = L.marker([markerLat, markerLng]).addTo(mapRef.current);
-
         marker.bindPopup(`
           <div>
             <strong>${local.locNome}</strong>
@@ -90,7 +137,6 @@ export const Home = () => {
             ${local.locDescricao}
           </div>
         `);
-
         markerRef.current.push(marker);
       }
     });
@@ -100,7 +146,7 @@ export const Home = () => {
   };
 
   return (
-    <div>
+    <div className="main-container">
       <div className="home">
         <div className="logo-grande">
           <img src={logo} alt="Logo" />
@@ -122,7 +168,7 @@ export const Home = () => {
         </form>
 
         <div className="container">
-          <div id="map" style={{ height: '400px', width: '100%' }}></div>
+          <div id="map" className="map-container"></div>
         </div>
       </div>
     </div>
