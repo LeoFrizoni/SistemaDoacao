@@ -14,8 +14,10 @@ export const Home = () => {
   const [enderecosFiltrados, setEnderecosFiltrados] = useState([]);
   const mapRef = useRef(null);
   const markerRef = useRef([]);
+  const mapContainerRef = useRef(null); // Referência para o contêiner do mapa
 
   useEffect(() => {
+    // Carregar endereços e localidades assim que a página carrega
     carregarCacheEnderecos();
     carregarCacheLocalidades();
     
@@ -35,6 +37,7 @@ export const Home = () => {
     }
   }, []);
 
+  // Carregar os Endereços da API
   const carregarCacheEnderecos = async () => {
     try {
       const response = await GetEndereco();
@@ -49,6 +52,7 @@ export const Home = () => {
     }
   };
 
+  // Carregar as Localidades da API
   const carregarCacheLocalidades = async () => {
     try {
       const response = await GetLocalidade();
@@ -63,6 +67,7 @@ export const Home = () => {
     }
   };
 
+  // Formatar o CEP
   const formatarCEP = (valor) => {
     return valor.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2').slice(0, 9);
   };
@@ -72,7 +77,7 @@ export const Home = () => {
     setCep(valorFormatado);
   };
 
-  // busca de Localidade e carregar os dados
+  // Realizar a busca de Localidade e carregar os dados
   const handleSearch = async (e) => {
     e.preventDefault();
     const cepRegex = /^\d{5}-\d{3}$/;
@@ -82,37 +87,57 @@ export const Home = () => {
     }
 
     try {
-      // busca de Localidade pelo CEP
+      // Busca de Localidade pelo CEP
       const localidadeResponse = await GetLocalidadeByCEP(cep);
       if (localidadeResponse && localidadeResponse.data && localidadeResponse.data.length > 0) {
         const locais = localidadeResponse.data;
         const { locLatitude, locLongitude } = locais[0];
         
+        // Atualiza o mapa com as localidades encontradas
         if (locLatitude && locLongitude) {
+          // Centraliza o mapa na nova localização
+          centralizarMapa(locLatitude, locLongitude);
           atualizarMapa(locLatitude, locLongitude, locais);
         }
 
+        // Filtra os endereços que estão relacionados às localidades encontradas
         const localidadesEncontradas = locais.map((local) => local.locCodigo);
         const enderecosFiltrados = cacheEnderecos.filter((endereco) =>
           localidadesEncontradas.includes(endereco.endCodigoLocalidade)
         );
         setEnderecosFiltrados(enderecosFiltrados);
+
+        // Rola a página até o mapa
+        rolarParaMapa();
       } else {
         console.error('Nenhum dado encontrado para o CEP informado.');
-        setEnderecosFiltrados([]); 
+        setEnderecosFiltrados([]);  // Limpa os endereços ao não encontrar localidades
       }
     } catch (error) {
       console.error('Erro ao buscar os dados do serviço:', error);
     }
   };
 
-  const atualizarMapa = (latitude, longitude, locais) => {
+  // Função para centralizar o mapa na nova localização
+  const centralizarMapa = (latitude, longitude) => {
     const lat = parseFloat(latitude);
     const lng = parseFloat(longitude);
-
     if (mapRef.current) {
       mapRef.current.setView([lat, lng], 16);
     }
+  };
+
+  // Função para rolar a página até o mapa
+  const rolarParaMapa = () => {
+    if (mapContainerRef.current) {
+      mapContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  // Atualiza a posição do mapa com as localidades
+  const atualizarMapa = (latitude, longitude, locais) => {
+    const lat = parseFloat(latitude);
+    const lng = parseFloat(longitude);
 
     markerRef.current.forEach((marker) => mapRef.current.removeLayer(marker));
     markerRef.current = [];
@@ -122,16 +147,19 @@ export const Home = () => {
       const markerLng = parseFloat(local.locLongitude);
 
       if (!isNaN(markerLat) && !isNaN(markerLng)) {
+        // Encontrar o endereço relacionado a essa localidade
         const enderecoRelacionado = cacheEnderecos.find((endereco) => endereco.endCodigoLocalidade === local.locCodigo);
 
+        // Criar conteúdo do popup
         const popupContent = `
           <div>
             <strong>${local.locNome}</strong><br />
             <em>${local.locDescricao}</em><br />
-            ${enderecoRelacionado ? `${enderecoRelacionado.endLogradouro}, ${enderecoRelacionado.endBairro}, ${enderecoRelacionado.endNumero}` : 'Endereço não disponível'}
+            ${enderecoRelacionado ? `${enderecoRelacionado.endLogradouro}, ${enderecoRelacionado.endBairro}` : 'Endereço não disponível'}
           </div>
         `;
 
+        // Adicionar o marcador ao mapa com o popup
         const marker = L.marker([markerLat, markerLng]).addTo(mapRef.current);
         marker.bindPopup(popupContent);
         markerRef.current.push(marker);
@@ -165,7 +193,7 @@ export const Home = () => {
         </form>
 
         <div className="container">
-          <div id="map" className="map-container"></div>
+          <div ref={mapContainerRef} id="map" className="map-container"></div>
         </div>
       </div>
     </div>
