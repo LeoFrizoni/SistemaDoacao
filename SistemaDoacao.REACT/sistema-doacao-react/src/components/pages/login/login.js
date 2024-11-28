@@ -6,11 +6,11 @@ export const Login = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleRegisterClick = () => {
-    setIsActive(true);
+    setIsActive(true);  
   };
 
   const handleLoginClick = () => {
-    setIsActive(false);
+    setIsActive(false);  
   };
 
   return (
