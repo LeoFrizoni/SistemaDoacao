@@ -51,7 +51,6 @@ export const Login = () => {
     };
 
     try {
-      // Verifica se o usuário já existe
       const checkResponse = await GetAdministrador();
       const existingUser = checkResponse.data.find(
         (user) => user.admUsuario === formData.admUsuario
@@ -64,20 +63,22 @@ export const Login = () => {
         return;
       }
 
-      // Realiza o cadastro
       const response = await PostAdministrador(dataToSend);
 
-      // Verifica a resposta da API
       if (response && response.data === "ADM registrado") {
         const inputUsuario = document.getElementById('registerUsuario');
         inputUsuario.setCustomValidity('Cadastro realizado com sucesso!');
         inputUsuario.reportValidity();
-        
-        // Limpa os campos do formulário
-        setFormData({ admUsuario: '', admSenha: '' });
 
-        // Exibe a tela de login
-        setIsActive(false); // Alterar a tela para login
+        setTimeout(() => {
+          setFormData({ admUsuario: '', admSenha: '' });
+          inputUsuario.setCustomValidity(''); 
+          inputUsuario.reportValidity();
+        }, 1000);  
+
+        setTimeout(() => {
+          setIsActive(false); 
+        }, 1000); 
       } else {
         const inputUsuario = document.getElementById('registerUsuario');
         inputUsuario.setCustomValidity('Erro ao realizar cadastro. Tente novamente!');
@@ -114,10 +115,18 @@ export const Login = () => {
         return;
       }
 
+      inputUsuario.setCustomValidity('Login feito com sucesso!');
+      inputUsuario.reportValidity();
+
+      setTimeout(() => {
+        inputUsuario.setCustomValidity(''); 
+        inputUsuario.reportValidity();
+      }, 1000);  
+
       console.log('Login bem-sucedido! Redirecionando para a Home');
       setTimeout(() => {
         window.location.href = '/home'; 
-      }, 1000);
+      }, 1000);  
     } catch (error) {
       console.error('Erro ao realizar login:', error);
     }
@@ -125,7 +134,6 @@ export const Login = () => {
 
   return (
     <div className={`container ${isActive ? 'active' : ''}`} id="container">
-      {/* Formulário de cadastro */}
       <div className="form-container sign-up">
         <form id="signupForm" onSubmit={handleRegisterSubmit}>
           <h1>Crie sua conta</h1>
@@ -139,7 +147,7 @@ export const Login = () => {
             value={formData.admUsuario}
             onChange={(e) => {
               const inputUsuario = e.target;
-              inputUsuario.setCustomValidity(''); // Limpa a validação customizada
+              inputUsuario.setCustomValidity(''); 
               handleInputChange(e);
             }}
             required
@@ -157,7 +165,6 @@ export const Login = () => {
         </form>
       </div>
 
-      {/* Formulário de login */}
       <div className="form-container sign-in">
         <form id="loginForm" onSubmit={handleLoginSubmit}>
           <h1>Kindness Compass</h1>
@@ -193,7 +200,6 @@ export const Login = () => {
         </form>
       </div>
 
-      {/* Tela de alternância entre login e cadastro */}
       <div className="toggle-container">
         <div className="toggle">
           <div className="toggle-panel toggle-left">
