@@ -51,6 +51,7 @@ export const Login = () => {
     };
 
     try {
+      // Verifica se o usuário já existe
       const checkResponse = await GetAdministrador();
       const existingUser = checkResponse.data.find(
         (user) => user.admUsuario === formData.admUsuario
@@ -63,17 +64,30 @@ export const Login = () => {
         return;
       }
 
+      // Realiza o cadastro
       const response = await PostAdministrador(dataToSend);
 
-      if (response.success) {
-        console.log('Cadastro realizado com sucesso!');
-        setFormData({ admUsuario: '', admSenha: '' }); 
-        setTimeout(() => {
-          handleLoginClick(); 
-        }, 1000);
+      // Verifica a resposta da API
+      if (response && response.data === "ADM registrado") {
+        const inputUsuario = document.getElementById('registerUsuario');
+        inputUsuario.setCustomValidity('Cadastro realizado com sucesso!');
+        inputUsuario.reportValidity();
+        
+        // Limpa os campos do formulário
+        setFormData({ admUsuario: '', admSenha: '' });
+
+        // Exibe a tela de login
+        setIsActive(false); // Alterar a tela para login
+      } else {
+        const inputUsuario = document.getElementById('registerUsuario');
+        inputUsuario.setCustomValidity('Erro ao realizar cadastro. Tente novamente!');
+        inputUsuario.reportValidity();
       }
     } catch (error) {
       console.error('Erro ao cadastrar:', error);
+      const inputUsuario = document.getElementById('registerUsuario');
+      inputUsuario.setCustomValidity('Erro ao realizar cadastro. Tente novamente!');
+      inputUsuario.reportValidity();
     }
   };
 
@@ -92,7 +106,7 @@ export const Login = () => {
         return;
       }
 
-      const userData = response.data; 
+      const userData = response.data;
 
       if (userData.admSenha !== loginData.admSenha) {
         inputSenha.setCustomValidity('Usuário ou senha incorretos.');
@@ -100,7 +114,7 @@ export const Login = () => {
         return;
       }
 
-      console.log('Login bem-sucedido! Redirecionando para a Home...');
+      console.log('Login bem-sucedido! Redirecionando para a Home');
       setTimeout(() => {
         window.location.href = '/home'; 
       }, 1000);
@@ -111,6 +125,7 @@ export const Login = () => {
 
   return (
     <div className={`container ${isActive ? 'active' : ''}`} id="container">
+      {/* Formulário de cadastro */}
       <div className="form-container sign-up">
         <form id="signupForm" onSubmit={handleRegisterSubmit}>
           <h1>Crie sua conta</h1>
@@ -124,7 +139,7 @@ export const Login = () => {
             value={formData.admUsuario}
             onChange={(e) => {
               const inputUsuario = e.target;
-              inputUsuario.setCustomValidity(''); 
+              inputUsuario.setCustomValidity(''); // Limpa a validação customizada
               handleInputChange(e);
             }}
             required
@@ -142,6 +157,7 @@ export const Login = () => {
         </form>
       </div>
 
+      {/* Formulário de login */}
       <div className="form-container sign-in">
         <form id="loginForm" onSubmit={handleLoginSubmit}>
           <h1>Kindness Compass</h1>
@@ -155,7 +171,7 @@ export const Login = () => {
             value={loginData.admUsuario}
             onChange={(e) => {
               const inputUsuario = e.target;
-              inputUsuario.setCustomValidity(''); 
+              inputUsuario.setCustomValidity('');
               handleLoginInputChange(e);
             }}
             required
@@ -168,7 +184,7 @@ export const Login = () => {
             value={loginData.admSenha}
             onChange={(e) => {
               const inputSenha = e.target;
-              inputSenha.setCustomValidity(''); 
+              inputSenha.setCustomValidity('');
               handleLoginInputChange(e);
             }}
             required
@@ -177,6 +193,7 @@ export const Login = () => {
         </form>
       </div>
 
+      {/* Tela de alternância entre login e cadastro */}
       <div className="toggle-container">
         <div className="toggle">
           <div className="toggle-panel toggle-left">
