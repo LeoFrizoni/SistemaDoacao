@@ -2,6 +2,7 @@
 using SistemaDoacao.MODEL.DTO;
 using SistemaDoacao.MODEL.Models;
 using SistemaDoacao.MODEL.Services;
+using System.Runtime.ConstrainedExecution;
 
 namespace SistemaDoacao.API.Controllers
 {
@@ -28,6 +29,13 @@ namespace SistemaDoacao.API.Controllers
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await _Service.oRepositoryAdministrador.SelecionarChaveAsync(id));
+        }
+
+        [HttpGet("GetADMByUser/{user}")]
+        public async Task<IActionResult> Get(string user)
+        {
+            var resultado = await _Service.oRepositoryAdministrador.SelecionarPeloUser(user);
+            return Ok(resultado);
         }
 
         [HttpPost("PostADM")]

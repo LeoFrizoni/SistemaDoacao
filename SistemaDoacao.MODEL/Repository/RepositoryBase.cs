@@ -126,5 +126,12 @@ namespace SistemaDoacao.MODEL.Repository
         {
             return await _context.Set<LOCALIDADE>().Where(l => l.LocCEP == cep).ToListAsync();
         }
+
+        // ADM
+
+        public async Task<ADMINISTRADOR> SelecionarPeloUser(string user)
+        {
+            return await _context.Set<ADMINISTRADOR>().FirstOrDefaultAsync(a => a.AdmUsuario == user);
+        }
     }
 }
