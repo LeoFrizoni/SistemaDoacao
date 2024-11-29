@@ -64,7 +64,6 @@ export const Home = () => {
     }
   };
 
-  // Formatar o CEP
   const formatarCEP = (valor) => {
     return valor.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2').slice(0, 9);
   };
@@ -141,7 +140,7 @@ export const Home = () => {
           <div>
             <strong>${local.locNome}</strong><br />
             <em>${local.locDescricao}</em><br />
-            ${enderecoRelacionado ? `${enderecoRelacionado.endLogradouro}, ${enderecoRelacionado.endBairro}, ${enderecoRelacionado.endNumero}` : 'Endereço não disponível'}
+            ${enderecoRelacionado ? `${enderecoRelacionado.endLogradouro}, ${enderecoRelacionado.endBairro}, ${enderecoRelacionado.endNumero},<a href="${local.locSite}" target="_blank" rel="nooper noreferrer">${local.locSite}</a> ` : 'Endereço não disponível'}
           </div>
         `;
 
